@@ -81,14 +81,6 @@ if not st.session_state.mode_selected:
         st.error("❌ Nessuna domanda trovata nel file selezionato.")
         st.stop()
 
-    st.subheader("📋 Anteprima prime 5 domande")
-    for q in questions[:5]:
-        st.write(f"**{q['domanda']}**")
-        st.write(f"A) {q['A']}")
-        st.write(f"B) {q['B']}")
-        st.write(f"C) {q['C']}")
-        st.write(f"D) {q['D']}")
-        st.write("---")
 
     num = st.number_input("Quante domande vuoi fare?", min_value=1, max_value=len(questions), value=min(10, len(questions)), step=1)
 
@@ -99,7 +91,7 @@ if not st.session_state.mode_selected:
         st.session_state.num_questions = num
         st.session_state.current_index = 0
         st.session_state.answers = [None] * num
-        st.experimental_rerun()
+        st.rerun()
 
 # Esecuzione quiz
 elif st.session_state.quiz_started and st.session_state.current_index < st.session_state.num_questions:
@@ -117,7 +109,7 @@ elif st.session_state.quiz_started and st.session_state.current_index < st.sessi
         else:
             st.session_state.answers[idx] = choice
             st.session_state.current_index += 1
-            st.experimental_rerun()
+            st.rerun()
 
 # Risultati finali
 elif st.session_state.quiz_started:
